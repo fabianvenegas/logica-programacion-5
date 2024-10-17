@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIENVENIDO</title>
+    <style>
+        /* Estilos para el fondo de la página con una imagen de Halloween */
+        body {
+            background-image: url('https://img.goodfon.com/wallpaper/nbig/d/98/film-mult-koshmar-pered.webp'); /* Reemplaza con la URL de la imagen de Halloween */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white; /* Cambiar color del texto para mejor visibilidad */
+        }
+
+        /* Estilos para el cuadro central */
+        .container {
+            background-color: rgba(178, 235, 242, 0.8); /* Celeste claro con opacidad */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        /* Estilos para el input y el botón */
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0288D1; /* Azul más oscuro */
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0277BD; /* Color más oscuro al pasar el mouse */
+        }
+
+        /* Estilos para el resultado y los intentos */
+        #resultado, #intentos {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adivina el Número Secreto</h1>
+        <input type="text" id="inputNumero" placeholder="Ingresa un número del 1 al 100">
+        <button onclick="adivinarNumero()">Adivinar</button>
+        <p id="resultado"></p>
+        <p id="intentos"></p>
+    </div>
+
+    <script>
+        // Generar número secreto aleatorio entre 1 y 100
+        const numeroSecreto = Math.floor(Math.random() * 100) + 1;
+        let intentos = []; // Lista de números ingresados por el usuario
+
+        function adivinarNumero() {
+            // Obtener el valor ingresado por el usuario
+            const inputNumero = document.getElementById("inputNumero").value;
+            const numeroIngresado = parseInt(inputNumero);
+
+            // Validar si el valor ingresado es un número
+            if (isNaN(numeroIngresado) || numeroIngresado < 1 || numeroIngresado > 100) {
+                document.getElementById("resultado").textContent = "Por favor, ingresa un número válido entre 1 y 100.";
+                return;
+            }
+
+            // Agregar el número ingresado a la lista de intentos
+            intentos.push(numeroIngresado);
+
+            // Verificar si el número ingresado es igual al número secreto
+            if (numeroIngresado === numeroSecreto) {
+                document.getElementById("resultado").textContent = "¡Felicidades, adivinaste el número secreto!";
+                document.getElementById("intentos").textContent = `Números ingresados: ${intentos.join(", ")}`;
+            } else {
+                document.getElementById("resultado").textContent = "Ups, el número secreto es incorrecto, vuelve a intentarlo.";
+            }
+
+            // Limpiar el campo de entrada
+            document.getElementById("inputNumero").value = '';
+        }
+    </script>
+</body>
+</html>
